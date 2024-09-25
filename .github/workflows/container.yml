@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Build container
+      - name: Build container App
         run: yarn build
 
       - name: Configure AWS credentials
