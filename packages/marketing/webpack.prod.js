@@ -1,0 +1,25 @@
+const { merge } = require('webpack-merge');
+const { ModuleFederationPlugin } = require('webpack').container;
+const commonConfig = require('./webpack.common');
+
+const prodConfig = {
+  mode: 'production',
+  output: {
+    filename: '[name].[contenthash].js',
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'marketing',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './MarketingApp': './src/bootstrap.js',
+      },
+      shared: {
+        react: { singleton: true },
+        'react-dom': { singleton: true },
+      },
+    }),
+  ],
+};
+
+module.exports = merge(commonConfig, prodConfig);
