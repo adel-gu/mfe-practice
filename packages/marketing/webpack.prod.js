@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge');
 const { ModuleFederationPlugin } = require('webpack').container;
 const commonConfig = require('./webpack.common');
+const packageJson = require('./package.json');
 
 const prodConfig = {
   mode: 'production',
@@ -15,10 +16,7 @@ const prodConfig = {
       exposes: {
         './MarketingApp': './src/bootstrap.js',
       },
-      shared: {
-        react: { singleton: true },
-        'react-dom': { singleton: true },
-      },
+      shared: packageJson.dependencies,
     }),
   ],
 };
