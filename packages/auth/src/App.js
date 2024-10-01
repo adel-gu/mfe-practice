@@ -9,7 +9,7 @@ const generateClassName = createGenerateClassName({
   productionPrefix: 'au',
 });
 
-export default () => {
+export default ({ onSignIn }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -41,8 +41,8 @@ export default () => {
     <div>
       <StylesProvider generateClassName={generateClassName}>
         <Routes>
-          <Route path="/auth/signin" element={<Signin />} />
-          <Route path="/auth/signup" element={<Signup />} />
+          <Route path="/auth/signin" element={<Signin onSignIn={onSignIn} />} />
+          <Route path="/auth/signup" element={<Signup onSignIn={onSignIn} />} />
         </Routes>
       </StylesProvider>
     </div>

@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { mount } from 'auth/AuthApp';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const MarketingApp = () => {
+const MarketingApp = ({ onSignIn }) => {
   const ref = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,6 +37,7 @@ const MarketingApp = () => {
       el: ref.current,
       routingStrategy: 'memory',
       initialPathname: [location.pathname],
+      onSignIn,
     });
   }, []);
 

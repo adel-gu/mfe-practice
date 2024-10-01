@@ -4,17 +4,17 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 import App from './App';
 
-const mount = ({ el, routingStrategy, initialPathname } = {}) => {
+const mount = ({ el, routingStrategy, initialPathname, onSignIn } = {}) => {
   const root = createRoot(el);
   root.render(
     <React.StrictMode>
       {routingStrategy === 'browser' ? (
         <BrowserRouter>
-          <App />
+          <App onSignIn={onSignIn} />
         </BrowserRouter>
       ) : (
         <MemoryRouter initialEntries={[...initialPathname]}>
-          <App />
+          <App onSignIn={onSignIn} />
         </MemoryRouter>
       )}
     </React.StrictMode>,
