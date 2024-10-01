@@ -1,24 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
-// import { createRoot } from 'react-dom/client';
 import App from './App';
 
-const mount = (el) => {
-  ReactDOM.render(
+const mount = ({ el, routingStrategy, initialPathname } = {}) => {
+  const root = createRoot(el);
+  console.log('Initial ENteries:', initialPathname);
+  root.render(
     <React.StrictMode>
-      <App />
+      {routingStrategy === 'browser' ? (
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      ) : (
+        <MemoryRouter initialEntries={[...initialPathname]}>
+          <App />
+        </MemoryRouter>
+      )}
     </React.StrictMode>,
-    el,
   );
 };
-
-// 1. development
-if (process.env.NODE_ENV === 'development') {
-  const devRoot = document.getElementById('root');
-  if (devRoot) {
-    mount(devRoot);
-  }
-}
 
 export { mount };
