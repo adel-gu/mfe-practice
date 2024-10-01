@@ -7,6 +7,7 @@ import {
 
 import Header from './components/Header';
 const MarketingAppLazy = lazy(() => import('./components/MarketingApp'));
+const AuthAppLazy = lazy(() => import('./components/AuthApp'));
 
 const generateClassName = createGenerateClassName({
   productionPrefix: 'co',
@@ -19,7 +20,10 @@ const App = () => {
         <div>
           <Header />
           <Suspense fallback="Loading...">
-            <MarketingAppLazy />
+            <Routes>
+              <Route path="/*" element={<MarketingAppLazy />} />
+              <Route path="/auth/*" element={<AuthAppLazy />} />
+            </Routes>
           </Suspense>
         </div>
       </BrowserRouter>
